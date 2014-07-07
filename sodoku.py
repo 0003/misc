@@ -57,12 +57,39 @@ print peers['A1']
 print len(peers['A1'])
 print set(sum(units['A1'],[])) - set(['A1'])
 print sum(units['A1'],[])
-print sum(units['A1'])
 
 
-""" Grid is the input that represents the inital state
+""" Grid is the input that represents the initial state
     Values are the intermediate status of the grid that we will change. This will be a dict with the key
     being a square - ie 'A1' -- and the values being a string of remaining digits - ie '123456'"""
 
+def grid_values(grid):
+    """Takes a grid and converts it into values"""
+    #0. mean we need to fgure them out.
+    characters = [character for character in grid if character in digits or character in '0.']
+    return dict(zip(squares,characters))
+
+def eliminate(values, square, digit):
+    """Where the magic happens"""
 
 
+def assign(values, square, digit):
+    
+    other_values = values[square].replace(digit,'')
+    if all(eliminate(values,square,od) for od in other_values):
+        return values
+    return False
+
+def parse_grid(grid):
+    """Parse grid takes a grid input and returns a list of possible values for each square. Otherwise
+    it returns FALSE."""
+    #Build a dict of squares and digits
+    values = dict((s,digits) for square in squares)
+    for s, d in grid_values(grid).items():
+        #need to make assign
+        if d in digits and not assign(values,s,d):
+            #
+            return False
+    return values
+
+print grid_values('00300.')
