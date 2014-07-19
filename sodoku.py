@@ -70,11 +70,11 @@ def grid_values(grid):
     return dict(zip(squares,characters))
 
 def eliminate(values, square, digit):
-    """Where the magic happens"""
+    """Where the magic happens."""
 
 
 def assign(values, square, digit):
-    
+
     other_values = values[square].replace(digit,'')
     if all(eliminate(values,square,od) for od in other_values):
         return values
