@@ -24,12 +24,15 @@ def main(lines):
 
     print new_records
     domains = collections.Counter([r[3] for r in new_records])
+    names = domains = collections.Counter([r[2] for r in new_records])
     print domains
+    print names
 
     final_records = []
     for i, r in enumerate(new_records):
         domain = r[3]
-        if domains[domain] > 1:
+        name = r[2]
+        if domains[domain] > 1 and names[name]>1:
             flag = 1
         else:
             flag = 0
